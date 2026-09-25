@@ -18,7 +18,6 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #030305;
-            /* Latar belakang gradient glow MERAH */
             background-image: 
                 radial-gradient(circle at 15% 0%, rgba(225, 29, 72, 0.12) 0%, transparent 25%),
                 radial-gradient(circle at 85% 100%, rgba(185, 28, 28, 0.12) 0%, transparent 25%);
@@ -47,7 +46,6 @@
         
         @media (min-width: 768px) { .input-dark { font-size: 14px !important; } }
         
-        /* Focus state merah */
         .input-dark:hover {
             border-color: rgba(225, 29, 72, 0.4);
             background-color: rgba(0, 0, 0, 0.7);
@@ -79,7 +77,6 @@
             box-shadow: none !important;
         }
 
-        /* Tombol Utama Merah */
         .btn-red {
             background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
             box-shadow: 0 4px 20px rgba(225, 29, 72, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
@@ -89,7 +86,6 @@
             transform: translateY(-2px);
         }
 
-        /* Tombol Gelap / Sekunder */
         .btn-dark {
             background: #111827;
             border: 1px solid #374151;
@@ -115,7 +111,6 @@
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* TAB SYSTEM (seperti referensi) */
         .nav-tabs {
             display: flex; gap: 0.5rem; padding: 0.5rem;
             background: rgba(0,0,0,0.3); border-radius: 0.75rem;
@@ -131,7 +126,6 @@
         }
         .nav-tab:hover:not(.active) { background: rgba(255,255,255,0.05); color: #cbd5e1; }
         
-        /* Tab aktif merah */
         .nav-tab.active {
             background: rgba(225, 29, 72, 0.15); color: #fff;
             border-color: rgba(225, 29, 72, 0.5);
@@ -143,10 +137,13 @@
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #000; border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; border: 1px solid #000; }
+        
+        /* Animasi foto story */
+        .zoom-hover { transition: transform 0.4s ease; }
+        .group:hover .zoom-hover { transform: scale(1.05); }
     </style>
 </head>
 <body class="antialiased min-h-screen p-2 sm:p-4 md:p-8 flex justify-center items-start">
@@ -157,114 +154,130 @@
 
         <!-- HEADER -->
         <div class="p-4 md:p-6 pb-4 border-b border-white/5 relative overflow-hidden flex justify-start items-center gap-3 md:gap-5 rounded-t-xl sm:rounded-t-2xl">
-            <!-- Icon Background Watermark (seperti referensi github) -->
             <i class="fas fa-play absolute -right-4 -top-4 text-7xl md:text-9xl text-white/5 transform -rotate-12 pointer-events-none"></i>
             
-            <!-- LOGO AVATAR GLOW -->
             <div class="relative z-10 shrink-0 group cursor-pointer">
-                <!-- Ubah warna glow avatar di sini -->
                 <div class="absolute inset-0 bg-gradient-to-tr from-red-600 to-orange-500 rounded-full blur-[6px] md:blur-[10px] opacity-60 animate-pulse transition-opacity duration-500"></div>
                 <!-- GANTI URL SRC DI BAWAH INI DENGAN LINK FOTO/LOGO ANDA -->
                 <img src="https://placehold.co/100x100/111827/e11d48?text=Logo" alt="Logo" class="relative w-12 h-12 md:w-16 md:h-16 rounded-full border-[2px] border-black object-cover z-10 group-hover:scale-105 transition-transform duration-300 bg-slate-900">
             </div>
 
-            <!-- TITLE -->
             <div class="flex items-center relative z-10">
                 <div>
                     <h1 class="text-xl md:text-3xl font-extrabold tracking-tight text-white mb-0 md:mb-1 leading-tight">
                         Official <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-400">Downloader</span>
                     </h1>
-                    <p class="text-slate-400 text-[10px] md:text-sm font-medium leading-tight mt-0.5">Premium Media Extractor & Downloader</p>
+                    <p class="text-slate-400 text-[10px] md:text-sm font-medium leading-tight mt-0.5">Media Extractor: Video, Story & Profil</p>
                 </div>
             </div>
         </div>
 
         <div class="p-3 md:p-6 pt-3 md:pt-5 relative">
             
-            <!-- Global Alert Box -->
             <div id="alert-box" class="hidden mb-4 p-3 rounded-lg md:rounded-xl text-[10px] md:text-sm font-medium border relative z-10"></div>
 
-            <!-- TAB MENU -->
             <div class="nav-tabs mb-4 p-1">
                 <div class="nav-tab active py-2 md:py-3 text-xs md:text-sm" data-target="tab-download">
-                    <i class="fas fa-cloud-download-alt"></i> Unduh Video
+                    <i class="fas fa-cloud-download-alt"></i> Ekstrak Data
                 </div>
                 <div class="nav-tab py-2 md:py-3 text-xs md:text-sm" data-target="tab-history">
                     <i class="fas fa-history"></i> Riwayat
                 </div>
             </div>
 
-            <!-- TAB 1: DOWNLOAD AREA -->
             <div id="tab-download" class="tab-content active relative z-10">
                 
-                <!-- Info Box (Persis seperti "Info Keamanan" di referensi) -->
                 <div class="bg-black/40 border border-slate-700/50 rounded-lg p-3 md:p-4 mb-5 shadow-inner relative overflow-hidden">
                     <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-slate-500 to-slate-700"></div>
                     <div class="flex items-start gap-3">
                         <div class="bg-slate-800/50 p-2 rounded-md text-slate-400 shrink-0 mt-0.5 hidden sm:block">
-                            <i class="fas fa-info-circle text-sm md:text-xl"></i>
+                            <i class="fas fa-bolt text-sm md:text-xl"></i>
                         </div>
                         <div class="flex-1 text-[10px] md:text-xs text-slate-300 leading-relaxed w-full">
-                            <p>Tempel tautan video dari aplikasi untuk mengunduh versi kualitas tinggi tanpa tanda air (watermark). Audio MP3 juga akan diekstrak secara otomatis.</p>
+                            <p>Sistem ini otomatis mendeteksi konten. Anda bisa mengunduh Video, Audio, Thumbnail, Foto Profil, hingga Foto Slide (Story) dari tautan yang sama.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Input Form -->
                 <form id="download-form" class="mb-2">
                     <div class="group relative z-50 mb-4">
-                        <label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 group-focus-within:text-red-400 transition-colors">URL Video <span class="text-rose-500">*</span></label>
+                        <label class="block text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 group-focus-within:text-red-400 transition-colors">Tautan (URL) <span class="text-rose-500">*</span></label>
                         <div class="relative">
                             <i class="fas fa-link absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs md:text-base group-focus-within:text-red-400 transition-colors z-30"></i>
-                            <!-- Style input mono/gelap -->
-                            <input type="url" id="tiktok-url" required autocomplete="off" class="w-full py-3 pl-10 md:pl-12 pr-4 input-dark rounded-lg md:rounded-xl mono relative z-20 text-xs md:text-sm" placeholder="https://www.tiktok.com/@user/video/123...">
+                            <input type="url" id="tiktok-url" required autocomplete="off" class="w-full py-3 pl-10 md:pl-12 pr-4 input-dark rounded-lg md:rounded-xl mono relative z-20 text-xs md:text-sm" placeholder="Tempel link video/story di sini...">
                         </div>
                     </div>
 
                     <button type="submit" id="submit-btn" class="w-full btn-action btn-red text-white font-bold py-3 md:py-4 rounded-lg md:rounded-xl flex justify-center items-center gap-2 focus:outline-none text-sm md:text-base mb-6">
-                        <i class="fas fa-rocket"></i> Proses URL
+                        <i class="fas fa-magic"></i> Ekstrak Sekarang
                     </button>
                 </form>
 
-                <!-- Loading State -->
                 <div id="loader" class="hidden flex-col items-center justify-center py-6 border border-white/5 rounded-xl bg-black/20">
                     <div class="spinner mb-3"></div>
-                    <p class="text-xs text-slate-400 font-mono animate-pulse uppercase tracking-widest">Mengekstrak Data...</p>
+                    <p class="text-xs text-slate-400 font-mono animate-pulse uppercase tracking-widest">Membedah Data...</p>
                 </div>
 
-                <!-- Result Box -->
+                <!-- Hasil Ekstrak Lengkap -->
                 <div id="result-section" class="hidden">
-                    <div class="bg-black/30 border border-red-900/30 rounded-xl p-3 md:p-5 relative overflow-hidden shadow-inner">
-                        <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-red-500 to-rose-600"></div>
+                    <div class="bg-black/30 border border-red-900/30 rounded-xl p-3 md:p-5 relative shadow-inner">
+                        <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-red-500 to-rose-600 rounded-l-xl"></div>
                         
+                        <!-- Profil & Judul Info -->
                         <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                            <!-- Thumbnail -->
                             <img id="res-cover" src="" class="w-24 h-32 md:w-28 md:h-40 object-cover rounded-lg shadow-[0_5px_15px_rgba(0,0,0,0.5)] border border-white/10 shrink-0">
-                            
-                            <!-- Info -->
                             <div class="flex-1 flex flex-col justify-center min-w-0">
-                                <h3 id="res-author" class="text-xs md:text-sm font-bold text-red-400 mb-1 font-mono">@username</h3>
-                                <p id="res-title" class="text-[11px] md:text-sm text-slate-300 line-clamp-3 md:line-clamp-4 leading-relaxed mb-3">Judul video akan tampil di sini...</p>
+                                <div class="flex items-center gap-2 mb-1.5">
+                                    <img id="res-avatar-img" src="" class="w-6 h-6 rounded-full border border-slate-600 object-cover">
+                                    <h3 id="res-author" class="text-xs md:text-sm font-bold text-red-400 font-mono">@username</h3>
+                                </div>
+                                <p id="res-title" class="text-[11px] md:text-sm text-slate-300 line-clamp-3 md:line-clamp-4 leading-relaxed mb-3"></p>
                             </div>
                         </div>
 
-                        <!-- Buttons Group -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                        <!-- Bagian A: Video Utama (Hanya tampil jika video) -->
+                        <div id="video-actions" class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 mb-4">
                             <a id="btn-dl-video-hd" href="#" target="_blank" class="w-full btn-action btn-red text-white font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 text-[11px] md:text-sm">
-                                <i class="fas fa-video"></i> MP4 (HD)
+                                <i class="fas fa-video"></i> MP4 (HD) No Watermark
                             </a>
                             <a id="btn-dl-video" href="#" target="_blank" class="w-full btn-action btn-dark text-slate-300 font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 text-[11px] md:text-sm">
-                                <i class="fas fa-mobile-screen"></i> MP4 (SD)
-                            </a>
-                            <a id="btn-dl-audio" href="#" target="_blank" class="w-full md:col-span-2 btn-action btn-dark text-slate-300 font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border-red-900/50 hover:border-red-500 text-[11px] md:text-sm mt-1">
-                                <i class="fas fa-music text-red-400"></i> Unduh Audio (MP3)
+                                <i class="fas fa-mobile-screen"></i> MP4 (SD) No Watermark
                             </a>
                         </div>
+
+                        <!-- Bagian B: Image Slide / Story (Hanya tampil jika foto story) -->
+                        <div id="image-actions" class="hidden mb-4 border border-slate-700/50 rounded-lg p-3 bg-black/40">
+                            <h4 class="text-[10px] md:text-xs font-bold text-red-400 mb-3 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fas fa-images"></i> Kumpulan Foto / Story
+                            </h4>
+                            <div id="image-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-[300px] overflow-y-auto pr-1">
+                                <!-- Foto Story di-inject via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Bagian C: Audio (Selalu tampil) -->
+                        <a id="btn-dl-audio" href="#" target="_blank" class="w-full btn-action btn-dark text-slate-300 font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border-red-900/50 hover:border-red-500 text-[11px] md:text-sm mb-4">
+                            <i class="fas fa-music text-red-400"></i> Unduh Audio (MP3)
+                        </a>
+
+                        <!-- Bagian D: Metadata Ekstra (Avatar & Thumbnail) -->
+                        <div class="border-t border-slate-700/50 pt-4">
+                            <h4 class="text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-wider"><i class="fas fa-box-open mr-1"></i> Data Ekstra</h4>
+                            <div class="grid grid-cols-2 gap-2 md:gap-3">
+                                <a id="btn-dl-thumb" href="#" target="_blank" class="w-full btn-action btn-dark text-slate-300 font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 text-[10px] md:text-xs border-slate-700 hover:border-slate-500">
+                                    <i class="fas fa-image text-slate-400"></i> Cover / Thumbnail
+                                </a>
+                                <a id="btn-dl-avatar" href="#" target="_blank" class="w-full btn-action btn-dark text-slate-300 font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 text-[10px] md:text-xs border-slate-700 hover:border-slate-500">
+                                    <i class="fas fa-user-circle text-slate-400"></i> Foto Profil Klien
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: HISTORY (Manage Repo style) -->
+            <!-- TAB 2: HISTORY -->
             <div id="tab-history" class="tab-content relative z-10">
                 <div class="bg-black/30 border border-slate-700/50 rounded-xl md:rounded-2xl p-4 md:p-5 relative">
                     <div class="flex justify-between items-center mb-4">
@@ -276,7 +289,6 @@
                         </button>
                     </div>
 
-                    <!-- List Area (Style table dari referensi) -->
                     <div class="border border-slate-700/50 bg-[#020202] rounded-lg overflow-hidden shadow-inner">
                         <div id="history-empty" class="p-6 text-center text-slate-500 text-xs font-mono">
                             <i class="fas fa-folder-open text-2xl mb-2 opacity-50 block"></i>
@@ -285,7 +297,6 @@
                         <div id="history-container" class="max-h-[300px] overflow-y-auto hidden">
                             <table class="min-w-full text-left text-[10px] md:text-xs">
                                 <tbody id="history-list-body" class="divide-y divide-slate-800/50 font-mono text-slate-300">
-                                    <!-- History di inject dari JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -311,13 +322,22 @@
             const navTabs = document.querySelectorAll('.nav-tab');
             const tabContents = document.querySelectorAll('.tab-content');
 
-            // Result Elements
+            // Result Elements (Main)
             const resCover = document.getElementById('res-cover');
             const resTitle = document.getElementById('res-title');
             const resAuthor = document.getElementById('res-author');
+            const resAvatarImg = document.getElementById('res-avatar-img'); // Avatar Mini di judul
+            
+            // Sections & Buttons
+            const videoActions = document.getElementById('video-actions');
+            const imageActions = document.getElementById('image-actions');
+            const imageGrid = document.getElementById('image-grid');
+            
             const btnVideoHd = document.getElementById('btn-dl-video-hd');
             const btnVideo = document.getElementById('btn-dl-video');
             const btnAudio = document.getElementById('btn-dl-audio');
+            const btnThumb = document.getElementById('btn-dl-thumb');
+            const btnAvatar = document.getElementById('btn-dl-avatar');
 
             // History Elements
             const historyContainer = document.getElementById('history-container');
@@ -332,11 +352,11 @@
                     tabContents.forEach(c => c.classList.remove('active'));
                     tab.classList.add('active');
                     document.getElementById(tab.dataset.target).classList.add('active');
-                    alertBox.classList.add('hidden'); // Sembunyikan alert saat ganti tab
+                    alertBox.classList.add('hidden');
                 });
             });
 
-            // --- Alert Notification (Style referensi) ---
+            // --- Alert Notification ---
             const showAlert = (message, type = 'success') => {
                 alertBox.className = `mt-2 mb-4 p-3 rounded-lg text-[10px] md:text-xs font-medium border flex items-start gap-2 shadow-inner relative z-10 ${
                     type === 'error' ? 'bg-rose-500/10 text-rose-400 border-rose-500/30' : 
@@ -368,12 +388,16 @@
                     tr.className = `hover:bg-white/[0.02] transition-colors cursor-pointer`;
                     tr.innerHTML = `
                         <td class="p-2 w-12"><img src="${item.cover}" class="w-8 h-12 object-cover rounded opacity-80"></td>
-                        <td class="p-2 truncate max-w-[150px]"><span class="text-red-400 block mb-0.5">@${item.author}</span><span class="text-slate-500 text-[9px] md:text-[10px] truncate block">${item.url}</span></td>
+                        <td class="p-2 truncate max-w-[150px]">
+                            <span class="text-red-400 block mb-0.5">
+                                ${item.type === 'image' ? '<i class="fas fa-images mr-1"></i>' : '<i class="fas fa-video mr-1"></i>'} @${item.author}
+                            </span>
+                            <span class="text-slate-500 text-[9px] md:text-[10px] truncate block">${item.url}</span>
+                        </td>
                         <td class="p-2 text-right w-10"><i class="fas fa-chevron-right text-slate-600"></i></td>
                     `;
-                    // Klik dari tab history akan langsung memproses ulang di tab utama
                     tr.addEventListener('click', () => {
-                        navTabs[0].click(); // Pindah ke tab 1
+                        navTabs[0].click(); 
                         inputUrl.value = item.url;
                         form.dispatchEvent(new Event('submit'));
                     });
@@ -383,8 +407,9 @@
 
             const saveToHistory = (data, url) => {
                 history = history.filter(h => h.url !== url);
-                history.unshift({ url: url, cover: data.cover, author: data.author_username });
-                if(history.length > 20) history.pop(); // Max 20 history
+                const type = (data.images && data.images.length > 0) ? 'image' : 'video';
+                history.unshift({ url: url, cover: data.cover, author: data.author_username, type: type });
+                if(history.length > 20) history.pop();
                 localStorage.setItem('official_dl_history', JSON.stringify(history));
                 renderHistory();
             };
@@ -417,36 +442,75 @@
                     const rawResult = await response.json();
 
                     if (rawResult.code === -1 || !rawResult.data) {
-                        throw new Error('Video privat atau URL tidak valid.');
+                        throw new Error('Data tidak ditemukan. Pastikan URL valid dan akun tidak digembok (Private).');
                     }
 
                     const data = {
                         title: rawResult.data.title,
                         author: rawResult.data.author.nickname,
                         author_username: rawResult.data.author.unique_id,
-                        cover: rawResult.data.cover,
+                        avatar: rawResult.data.author.avatar, // Mengambil Foto Profil
+                        cover: rawResult.data.cover,          // Mengambil Thumbnail
                         video_hd: rawResult.data.hdplay || rawResult.data.play,
                         video_no_watermark: rawResult.data.play,
-                        audio: rawResult.data.music
+                        audio: rawResult.data.music,
+                        images: rawResult.data.images         // Mengambil Array Foto jika itu Story/Slide
                     };
 
+                    // Set Base Info
                     resCover.src = data.cover;
-                    resTitle.textContent = data.title || 'Tidak ada caption';
+                    resAvatarImg.src = data.avatar;
+                    resTitle.textContent = data.title || 'Tidak ada keterangan (caption).';
                     resAuthor.textContent = `@${data.author_username}`;
                     
-                    btnVideoHd.href = data.video_hd || data.video_no_watermark;
-                    btnVideo.href = data.video_no_watermark;
+                    // Set Data Ekstra (Thumbnail & Avatar)
+                    btnThumb.href = data.cover;
+                    btnAvatar.href = data.avatar;
+                    
+                    // Set Audio (Tersedia di Video maupun Story)
                     btnAudio.href = data.audio;
+
+                    // Logika Deteksi: Video vs Story(Image)
+                    if (data.images && data.images.length > 0) {
+                        // Ini adalah Foto Story / Slideshow
+                        videoActions.classList.add('hidden');
+                        imageActions.classList.remove('hidden');
+                        
+                        imageGrid.innerHTML = ''; // Clear grid
+                        data.images.forEach((imgUrl, index) => {
+                            const div = document.createElement('div');
+                            div.className = 'relative group rounded-lg overflow-hidden border border-slate-700 aspect-[9/16] cursor-pointer';
+                            div.innerHTML = `
+                                <img src="${imgUrl}" class="w-full h-full object-cover zoom-hover">
+                                <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="text-[9px] text-white font-mono mb-2 bg-black/50 px-2 py-0.5 rounded">Foto ${index + 1}</span>
+                                    <a href="${imgUrl}" target="_blank" class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-500 transform hover:scale-110 transition shadow-lg">
+                                        <i class="fas fa-download text-xs"></i>
+                                    </a>
+                                </div>
+                            `;
+                            imageGrid.appendChild(div);
+                        });
+                        showAlert('Berhasil mendeteksi konten Gambar/Story. Silakan unduh.', 'success');
+                        
+                    } else {
+                        // Ini adalah Video Reguler
+                        imageActions.classList.add('hidden');
+                        videoActions.classList.remove('hidden');
+                        
+                        btnVideoHd.href = data.video_hd || data.video_no_watermark;
+                        btnVideo.href = data.video_no_watermark;
+                        showAlert('Sukses! Seluruh data metadata berhasil diekstrak.', 'success');
+                    }
 
                     loader.classList.add('hidden');
                     resultSection.classList.remove('hidden');
-                    showAlert('Success! Data video berhasil diekstrak.', 'success');
                     
                     saveToHistory(data, url);
 
                 } catch (error) {
                     loader.classList.add('hidden');
-                    showAlert(`Failed: ${error.message}`, 'error');
+                    showAlert(`Gagal: ${error.message}`, 'error');
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnHtml;
