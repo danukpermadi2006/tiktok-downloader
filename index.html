@@ -78,7 +78,7 @@
         .tab-content { display: none; animation: fadeIn 0.3s ease forwards; }
         .tab-content.active { display: block; }
 
-        /* MINI TABS UNTUK HASIL (Hemat Ruang) */
+        /* MINI TABS UNTUK HASIL */
         .res-tab-btn { flex: 1; padding: 0.5rem; text-align: center; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; color: #64748b; cursor: pointer; transition: all 0.2s; background: transparent; }
         @media (min-width: 768px) { .res-tab-btn { font-size: 0.8rem; } }
         .res-tab-btn.active { background: #e11d48; color: white; box-shadow: 0 2px 10px rgba(225, 29, 72, 0.3); }
@@ -115,7 +115,8 @@
                     <h1 class="text-xl md:text-3xl font-extrabold tracking-tight text-white mb-0 md:mb-1 leading-tight">
                         Official <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-400">Downloader</span>
                     </h1>
-                    <p class="text-slate-400 text-[10px] md:text-sm font-medium leading-tight mt-0.5">Kompak. Cepat. Tanpa Iklan.</p>
+                    <!-- DESKRIPSI DIUBAH AGAR LEBIH MENYOROT FITUR ALL-IN-ONE -->
+                    <p class="text-slate-400 text-[10px] md:text-sm font-medium leading-tight mt-0.5">All-in-One: Video HD, Story, Audio & Foto Profil.</p>
                 </div>
             </div>
         </div>
@@ -137,8 +138,10 @@
                     <div class="group relative z-50 mb-4">
                         <div class="relative">
                             <i class="fas fa-link absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs md:text-base group-focus-within:text-red-400 transition-colors z-30"></i>
-                            <input type="url" id="tiktok-url" required autocomplete="off" class="w-full py-3.5 pl-10 md:pl-12 pr-4 input-dark rounded-xl mono relative z-20 text-xs md:text-sm" placeholder="Tempel link video/story Tiktok...">
+                            <input type="url" id="tiktok-url" required autocomplete="off" class="w-full py-3.5 pl-10 md:pl-12 pr-4 input-dark rounded-xl mono relative z-20 text-xs md:text-sm" placeholder="Tempel tautan TikTok di sini...">
                         </div>
+                        <!-- TAMBAHAN TEKS BANTUAN AGAR ORANG TAHU FITURNYA LENGKAP -->
+                        <p class="text-[9px] md:text-[10px] text-slate-500 mt-1.5 ml-1"><i class="fas fa-check-circle text-emerald-500/70 mr-1"></i>Mendukung Video HD, Slide Foto (Story), Lagu MP3, dan Foto Profil.</p>
                     </div>
                     <button type="submit" id="submit-btn" class="w-full btn-action btn-red text-white font-bold py-3.5 md:py-4 rounded-xl flex justify-center items-center gap-2 focus:outline-none text-sm md:text-base mb-4 shadow-lg shadow-red-900/20">
                         <i class="fas fa-download"></i> Dapatkan File
@@ -150,11 +153,10 @@
                     <p class="text-xs text-slate-400 font-mono animate-pulse uppercase tracking-widest">Menganalisa Media...</p>
                 </div>
 
-                <!-- HASIL EKSTRAK (Dirombak jadi super ringkas) -->
+                <!-- HASIL EKSTRAK -->
                 <div id="result-section" class="hidden">
                     <div class="bg-[#0b0f19] border border-slate-700/50 rounded-xl p-3 relative shadow-inner">
                         
-                        <!-- Profil & Judul Info yang lebih kecil -->
                         <div class="flex items-center gap-3 mb-3 bg-black/40 p-2 rounded-lg border border-white/5">
                             <img id="res-avatar-img" src="" class="w-10 h-10 rounded-full border border-slate-600 object-cover shrink-0">
                             <div class="flex-1 min-w-0">
@@ -163,7 +165,6 @@
                             </div>
                         </div>
 
-                        <!-- Mini Tabs untuk Kategori File -->
                         <div class="flex gap-1 mb-3 bg-black/50 p-1 rounded-lg border border-slate-800">
                             <button type="button" class="res-tab-btn active" data-panel="panel-video" id="tab-btn-video"><i class="fas fa-video mr-1"></i> Video</button>
                             <button type="button" class="res-tab-btn hidden" data-panel="panel-image" id="tab-btn-image"><i class="fas fa-images mr-1"></i> Story</button>
@@ -174,7 +175,6 @@
                         <!-- PANEL VIDEO -->
                         <div id="panel-video" class="res-panel active">
                             <div class="flex flex-col gap-2">
-                                <!-- Resolusi HD -->
                                 <div class="flex justify-between items-center bg-slate-800/40 hover:bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 transition">
                                     <div class="flex items-center gap-2">
                                         <i class="fas fa-medal text-amber-400 text-lg"></i>
@@ -188,7 +188,6 @@
                                         <a id="btn-dl-vid-hd" href="#" target="_blank" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1.5 rounded text-[10px] md:text-xs font-bold transition"><i class="fas fa-arrow-down"></i> Unduh</a>
                                     </div>
                                 </div>
-                                <!-- Resolusi SD -->
                                 <div class="flex justify-between items-center bg-slate-800/40 hover:bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 transition">
                                     <div class="flex items-center gap-2">
                                         <i class="fas fa-mobile-screen text-slate-400 text-lg ml-1 mr-0.5"></i>
@@ -205,12 +204,10 @@
                             </div>
                         </div>
 
-                        <!-- PANEL IMAGE STORY (Horizontal Scroll) -->
+                        <!-- PANEL IMAGE STORY -->
                         <div id="panel-image" class="res-panel">
                             <div class="text-[10px] text-slate-400 mb-2 italic"><i class="fas fa-info-circle"></i> Geser ke kanan untuk melihat semua foto.</div>
-                            <div id="image-scroll-container" class="flex gap-3 overflow-x-auto pb-2 snap-x">
-                                <!-- Injeksi Foto Story JS -->
-                            </div>
+                            <div id="image-scroll-container" class="flex gap-3 overflow-x-auto pb-2 snap-x"></div>
                         </div>
 
                         <!-- PANEL AUDIO -->
@@ -261,7 +258,7 @@
                 <div class="bg-black/30 border border-slate-700/50 rounded-xl p-4 relative">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="text-sm font-bold text-slate-200"><i class="fas fa-server mr-1 text-slate-400"></i> Cache Lokal</h3>
-                        <button type="button" id="clear-history" class="text-[10px] font-bold bg-rose-500/10 text-rose-400 px-2.5 py-1 rounded border border-rose-500/20">Bersihkan</button>
+                        <button type="button" id="clear-history" class="text-[10px] font-bold bg-rose-500/10 text-rose-400 px-2.5 py-1 rounded border border-rose-500/20 hover:bg-rose-500/20 transition">Bersihkan</button>
                     </div>
                     <div class="border border-slate-700/50 bg-[#020202] rounded-lg overflow-hidden shadow-inner">
                         <div id="history-empty" class="p-5 text-center text-slate-500 text-[11px] font-mono"><i class="fas fa-folder-open text-xl mb-1 block"></i>Kosong.</div>
@@ -279,17 +276,13 @@
 
     <!-- MODAL PREVIEW GLOBAL -->
     <div id="preview-modal" class="fixed inset-0 bg-black/90 z-[100] hidden flex-col items-center justify-center p-4">
-        <!-- Close Button (Absolute Top Right) -->
-        <button type="button" onclick="closePreview()" class="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 bg-white/10 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition backdrop-blur-sm shadow-lg border border-white/20">
+        <button type="button" onclick="closePreview()" class="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 bg-white/10 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition backdrop-blur-sm shadow-lg border border-white/20 z-[101]">
             <i class="fas fa-times text-lg"></i>
         </button>
         
-        <!-- Media Container -->
         <div id="modal-media-container" class="modal-content-scale w-full max-w-lg flex flex-col items-center justify-center relative bg-black rounded-lg border border-white/10 overflow-hidden shadow-2xl">
-            <!-- Media di injeksi disini via JS -->
         </div>
         
-        <!-- Action bar di dalam modal agar bisa di download pas nonton -->
         <div class="mt-4 flex gap-2 opacity-0 animate-[fadeIn_0.5s_ease_0.3s_forwards]">
             <a id="modal-dl-btn" href="#" target="_blank" download class="bg-red-600 text-white px-6 py-2 rounded-full text-xs font-bold flex items-center gap-2 hover:bg-red-500 shadow-[0_0_15px_rgba(225,29,72,0.5)]">
                 <i class="fas fa-download"></i> Download Langsung
@@ -298,15 +291,15 @@
     </div>
 
     <script>
-        // --- PREVIEW MODAL LOGIC (Global) ---
+        // --- PREVIEW MODAL LOGIC ---
         const modal = document.getElementById('preview-modal');
         const mediaContainer = document.getElementById('modal-media-container');
         const modalDlBtn = document.getElementById('modal-dl-btn');
         let currentAudio = null;
 
         window.openPreview = function(type, url) {
-            mediaContainer.innerHTML = ''; // Bersihkan kontainer
-            modalDlBtn.href = url; // Set link download di pop-up
+            mediaContainer.innerHTML = ''; 
+            modalDlBtn.href = url; 
             
             if(type === 'video') {
                 mediaContainer.innerHTML = `<video controls autoplay class="w-full max-h-[75vh] bg-black"><source src="${url}" type="video/mp4">Browser tidak support.</video>`;
@@ -326,13 +319,13 @@
             
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
+            document.body.style.overflow = 'hidden'; 
         };
 
         window.closePreview = function() {
             if(currentAudio) { currentAudio.pause(); currentAudio = null; }
             mediaContainer.innerHTML = ''; 
-            mediaContainer.className = 'modal-content-scale w-full max-w-lg flex flex-col items-center justify-center relative bg-black rounded-lg border border-white/10 overflow-hidden shadow-2xl'; // Reset style
+            mediaContainer.className = 'modal-content-scale w-full max-w-lg flex flex-col items-center justify-center relative bg-black rounded-lg border border-white/10 overflow-hidden shadow-2xl'; 
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.style.overflow = ''; 
@@ -350,7 +343,7 @@
             const navTabs = document.querySelectorAll('.nav-tab');
             const tabContents = document.querySelectorAll('.tab-content');
 
-            // Mini Tabs (Result Panel)
+            // Mini Tabs
             const resTabBtns = document.querySelectorAll('.res-tab-btn');
             const resPanels = document.querySelectorAll('.res-panel');
             const tabBtnVideo = document.getElementById('tab-btn-video');
@@ -361,7 +354,7 @@
             const resTitle = document.getElementById('res-title');
             const resAvatarImg = document.getElementById('res-avatar-img');
             
-            // Tombol-tombol Eksekusi
+            // Tombol Eksekusi
             const btnPrevVidHd = document.getElementById('btn-prev-vid-hd');
             const btnDlVidHd = document.getElementById('btn-dl-vid-hd');
             const btnPrevVidSd = document.getElementById('btn-prev-vid-sd');
@@ -376,6 +369,71 @@
             const btnDlAvatar = document.getElementById('btn-dl-avatar');
 
             const imageScrollContainer = document.getElementById('image-scroll-container');
+
+            // --- History Logic ---
+            const historyContainer = document.getElementById('history-container');
+            const historyEmpty = document.getElementById('history-empty');
+            const historyListBody = document.getElementById('history-list-body');
+            const clearHistoryBtn = document.getElementById('clear-history');
+
+            let history = JSON.parse(localStorage.getItem('official_dl_history')) || [];
+
+            const renderHistory = () => {
+                if (history.length === 0) {
+                    historyContainer.classList.add('hidden');
+                    historyEmpty.classList.remove('hidden');
+                    return;
+                }
+                historyContainer.classList.remove('hidden');
+                historyEmpty.classList.add('hidden');
+                historyListBody.innerHTML = '';
+                
+                history.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = `hover:bg-white/[0.02] transition-colors cursor-pointer`;
+                    tr.innerHTML = `
+                        <td class="p-2 w-12"><img src="${item.cover}" class="w-8 h-12 object-cover rounded opacity-80"></td>
+                        <td class="p-2 truncate max-w-[150px]">
+                            <span class="text-red-400 block mb-0.5">
+                                ${item.type === 'image' ? '<i class="fas fa-images mr-1"></i>' : '<i class="fas fa-video mr-1"></i>'} @${item.author}
+                            </span>
+                            <span class="text-slate-500 text-[9px] truncate block">${item.url}</span>
+                        </td>
+                        <td class="p-2 text-right w-10"><i class="fas fa-chevron-right text-slate-600"></i></td>
+                    `;
+                    tr.addEventListener('click', () => {
+                        navTabs[0].click(); 
+                        inputUrl.value = item.url;
+                        form.dispatchEvent(new Event('submit'));
+                    });
+                    historyListBody.appendChild(tr);
+                });
+            };
+
+            const saveToHistory = (data, url) => {
+                history = history.filter(h => h.url !== url);
+                const isImage = (data.images && data.images.length > 0);
+                
+                history.unshift({ 
+                    url: url, 
+                    cover: data.cover, 
+                    author: data.author.unique_id, 
+                    type: isImage ? 'image' : 'video' 
+                });
+                
+                if(history.length > 20) history.pop();
+                localStorage.setItem('official_dl_history', JSON.stringify(history));
+                renderHistory();
+            };
+
+            clearHistoryBtn.addEventListener('click', () => {
+                history = [];
+                localStorage.removeItem('official_dl_history');
+                renderHistory();
+                showAlert('Cache riwayat berhasil dibersihkan.', 'success');
+            });
+
+            renderHistory();
 
             // --- Logic Tabs Utama ---
             navTabs.forEach(tab => {
@@ -429,32 +487,26 @@
 
                     const data = rawResult.data;
                     
-                    // Isi Info Singkat
                     resAuthor.textContent = `@${data.author.unique_id}`;
                     resTitle.textContent = data.title || 'Tidak ada deskripsi.';
                     resAvatarImg.src = data.author.avatar;
 
-                    // Mengatur Data Ekstra
                     btnPrevThumb.onclick = () => openPreview('image', data.cover);
                     btnDlThumb.href = data.cover;
                     btnPrevAvatar.onclick = () => openPreview('image', data.author.avatar);
                     btnDlAvatar.href = data.author.avatar;
                     
-                    // Mengatur Audio
                     btnPrevAudio.onclick = () => openPreview('audio', data.music);
                     btnDlAudio.href = data.music;
 
-                    // Deteksi: Apakah Video atau Slide Story?
                     if (data.images && data.images.length > 0) {
-                        // KONTEN STORY
                         tabBtnVideo.classList.add('hidden');
                         tabBtnImage.classList.remove('hidden');
-                        tabBtnImage.click(); // Otomatis aktifkan tab Image
+                        tabBtnImage.click(); 
                         
                         imageScrollContainer.innerHTML = '';
                         data.images.forEach((imgUrl, i) => {
                             const slideDiv = document.createElement('div');
-                            // Kotak foto super rapi untuk horizontal scroll
                             slideDiv.className = 'shrink-0 w-28 md:w-32 bg-slate-800/40 border border-slate-700/50 rounded-lg p-1.5 snap-center flex flex-col gap-1.5';
                             slideDiv.innerHTML = `
                                 <div class="relative w-full aspect-[9/16] rounded-md overflow-hidden group cursor-pointer" onclick="openPreview('image', '${imgUrl}')">
@@ -466,10 +518,9 @@
                             imageScrollContainer.appendChild(slideDiv);
                         });
                     } else {
-                        // KONTEN VIDEO
                         tabBtnImage.classList.add('hidden');
                         tabBtnVideo.classList.remove('hidden');
-                        tabBtnVideo.click(); // Otomatis aktifkan tab Video
+                        tabBtnVideo.click(); 
 
                         const urlHD = data.hdplay || data.play;
                         const urlSD = data.play;
@@ -484,6 +535,8 @@
                     loader.classList.add('hidden');
                     resultSection.classList.remove('hidden');
                     showAlert('Sukses membedah link!', 'success');
+
+                    saveToHistory(data, url);
 
                 } catch (error) {
                     loader.classList.add('hidden');
