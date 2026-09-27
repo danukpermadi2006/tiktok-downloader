@@ -192,20 +192,20 @@
                         <p class="text-[9px] md:text-[10px] text-slate-500 mt-1.5 ml-1"><i class="fas fa-check-circle text-emerald-500/70 mr-1"></i>Supports HD Video, Photo Slides (Story), MP3 Audio, and Profile Pictures.</p>
                     </div>
                     
-                    <button type="submit" id="submit-btn" class="w-full btn-action btn-red text-white font-bold py-3.5 md:py-4 rounded-xl flex justify-center items-center gap-2 focus:outline-none text-sm md:text-base mb-4 shadow-lg shadow-red-900/20">
+                    <button type="submit" id="submit-btn" class="w-full btn-action btn-red text-white font-bold py-3 rounded-xl flex justify-center items-center gap-2 focus:outline-none text-sm md:text-base mb-4 shadow-lg shadow-red-900/20">
                         <i class="fas fa-search"></i> Extract & Get File
                     </button>
                 </form>
 
-                <div id="loader" class="hidden flex-col items-center justify-center py-16 border border-rose-900/30 rounded-xl bg-gradient-to-b from-black/60 to-black/20 shadow-[inset_0_0_30px_rgba(225,29,72,0.05)] relative overflow-hidden">
+                <div id="loader" class="hidden flex-col items-center justify-center py-10 border border-rose-900/30 rounded-xl bg-gradient-to-b from-black/60 to-black/20 shadow-[inset_0_0_30px_rgba(225,29,72,0.05)] relative overflow-hidden">
                     <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-                        <div class="w-40 h-40 bg-red-500 rounded-full blur-[60px] animate-pulse"></div>
+                        <div class="w-32 h-32 bg-red-500 rounded-full blur-[50px] animate-pulse"></div>
                     </div>
-                    <div class="loader-orbit mb-5 z-10">
-                        <i class="fas fa-satellite-dish text-red-500 text-2xl"></i>
+                    <div class="loader-orbit mb-4 z-10 transform scale-90">
+                        <i class="fas fa-satellite-dish text-red-500 text-xl"></i>
                     </div>
-                    <h3 class="text-white text-xs md:text-sm font-bold tracking-widest mb-1.5 z-10 drop-shadow-lg">ANALYZING MEDIA</h3>
-                    <p class="text-[9px] md:text-[10px] text-slate-400 font-mono animate-pulse uppercase tracking-widest z-10">Please wait a moment...</p>
+                    <h3 class="text-white text-xs font-bold tracking-widest mb-1 z-10 drop-shadow-lg">ANALYZING MEDIA</h3>
+                    <p class="text-[9px] text-slate-400 font-mono animate-pulse uppercase tracking-widest z-10">Please wait...</p>
                 </div>
 
                 <div id="result-section" class="hidden">
