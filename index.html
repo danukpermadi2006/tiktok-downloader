@@ -172,9 +172,19 @@
                     </button>
                 </form>
 
-                <div id="loader" class="hidden flex-col items-center justify-center py-10 border border-white/5 rounded-xl bg-black/20">
-                    <div class="spinner spinner-large mb-4"></div>
-                    <p class="text-xs text-slate-400 font-mono animate-pulse uppercase tracking-widest">Analyzing Media...</p>
+                <div id="loader" class="hidden flex-col items-center justify-center py-12 border border-slate-800/50 rounded-xl bg-gradient-to-b from-black/40 to-black/20 shadow-inner relative overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+                        <div class="w-32 h-32 bg-red-500 rounded-full blur-[40px] animate-pulse"></div>
+                    </div>
+                    <div class="relative w-12 h-12 md:w-16 md:h-16 mb-4 md:mb-5">
+                        <div class="absolute inset-0 border-[3px] border-slate-700/50 rounded-full"></div>
+                        <div class="absolute inset-0 border-[3px] border-red-500 rounded-full border-t-transparent animate-spin"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-bolt text-red-500 animate-pulse text-lg md:text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-white text-xs md:text-sm font-bold tracking-wider mb-1 z-10">EXTRACTING DATA</h3>
+                    <p class="text-[9px] md:text-[10px] text-slate-500 font-mono animate-pulse uppercase tracking-widest z-10">Please wait a moment...</p>
                 </div>
 
                 <div id="result-section" class="hidden">
@@ -589,6 +599,7 @@
                 resultSection.classList.add('hidden');
                 alertBox.classList.add('hidden');
                 loader.classList.remove('hidden');
+                loader.classList.add('flex');
                 
                 const originalBtnHtml = submitBtn.innerHTML;
                 submitBtn.innerHTML = `<div class="spinner border-t-white"></div>`;
@@ -655,6 +666,7 @@
                     }
 
                     loader.classList.add('hidden');
+                    loader.classList.remove('flex');
                     resultSection.classList.remove('hidden');
                     showAlert('Media data successfully retrieved!', 'success');
 
@@ -662,6 +674,7 @@
 
                 } catch (error) {
                     loader.classList.add('hidden');
+                    loader.classList.remove('flex');
                     let errorMsg = error.message;
                     
                     if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError')) {
