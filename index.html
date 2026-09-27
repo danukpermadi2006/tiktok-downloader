@@ -231,7 +231,7 @@
                                     </div>
                                     <div class="flex gap-1.5">
                                         <button type="button" id="btn-prev-vid-sd" class="bg-slate-700 hover:bg-slate-600 text-white px-2.5 py-1.5 rounded text-[10px] md:text-xs font-bold transition"><i class="fas fa-play"></i> Preview</button>
-                                        <button type="button" id="btn-dl-vid-sd" class="bg-slate-600 hover:bg-slate-500 text-white px-2.5 py-1.5 rounded text-[10px] md:text-xs font-bold transition flex items-center gap-1"><i class="fas fa-arrow-down"></i> Download</button>
+                                        <button type="button" id="btn-dl-vid-sd" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1.5 rounded text-[10px] md:text-xs font-bold transition flex items-center gap-1 shadow-lg shadow-red-900/20"><i class="fas fa-arrow-down"></i> Download</button>
                                     </div>
                                 </div>
                             </div>
@@ -267,16 +267,16 @@
                                     <i class="fas fa-image text-slate-400 mb-1.5 text-lg"></i>
                                     <div class="text-[10px] font-bold text-slate-300 mb-2">Thumbnail/Cover</div>
                                     <div class="flex gap-1 w-full">
-                                        <button type="button" id="btn-prev-thumb" class="flex-1 bg-slate-700 text-white py-1 rounded text-[9px] font-bold"><i class="fas fa-eye"></i> View</button>
-                                        <button type="button" id="btn-dl-thumb" class="flex-1 bg-slate-600 text-white py-1 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i class="fas fa-arrow-down"></i> Save</button>
+                                        <button type="button" id="btn-prev-thumb" class="flex-1 bg-slate-700 hover:bg-slate-600 transition-colors text-white py-1 rounded text-[9px] font-bold"><i class="fas fa-eye"></i> View</button>
+                                        <button type="button" id="btn-dl-thumb" class="flex-1 bg-red-600 hover:bg-red-500 transition-colors shadow-lg shadow-red-900/20 text-white py-1 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i class="fas fa-arrow-down"></i> Save</button>
                                     </div>
                                 </div>
                                 <div class="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/50 flex flex-col items-center justify-center text-center">
                                     <i class="fas fa-user-circle text-slate-400 mb-1.5 text-lg"></i>
                                     <div class="text-[10px] font-bold text-slate-300 mb-2">Profile Picture</div>
                                     <div class="flex gap-1 w-full">
-                                        <button type="button" id="btn-prev-avatar" class="flex-1 bg-slate-700 text-white py-1 rounded text-[9px] font-bold"><i class="fas fa-eye"></i> View</button>
-                                        <button type="button" id="btn-dl-avatar" class="flex-1 bg-slate-600 text-white py-1 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i class="fas fa-arrow-down"></i> Save</button>
+                                        <button type="button" id="btn-prev-avatar" class="flex-1 bg-slate-700 hover:bg-slate-600 transition-colors text-white py-1 rounded text-[9px] font-bold"><i class="fas fa-eye"></i> View</button>
+                                        <button type="button" id="btn-dl-avatar" class="flex-1 bg-red-600 hover:bg-red-500 transition-colors shadow-lg shadow-red-900/20 text-white py-1 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i class="fas fa-arrow-down"></i> Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -643,7 +643,7 @@
                                     <img src="${imgUrl}" class="w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"><i class="fas fa-expand text-white"></i></div>
                                 </div>
-                                <button type="button" class="w-full bg-slate-700 hover:bg-slate-600 text-white text-[9px] md:text-[10px] font-bold py-1.5 rounded text-center transition flex items-center justify-center gap-1" onclick="forceDownload('${imgUrl}', '${filename}')">
+                                <button type="button" class="w-full bg-red-600 hover:bg-red-500 text-white text-[9px] md:text-[10px] font-bold py-1.5 rounded text-center transition flex items-center justify-center gap-1 shadow-lg shadow-red-900/20" onclick="forceDownload('${imgUrl}', '${filename}')">
                                     <i class="fas fa-arrow-down"></i> Save ${i+1}
                                 </button>
                             `;
