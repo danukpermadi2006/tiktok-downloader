@@ -7,20 +7,21 @@
     <meta name="description" content="Unduh video, story, dan audio TikTok tanpa watermark dengan mudah dan gratis.">
     <meta name="keywords" content="tiktok downloader, download video tiktok, tiktok mp3, tiktok story saver, tiktok no watermark">
     
-    <!-- Open Graph for Social Media Sharing (Updated with better placeholder structure) -->
+    <!-- Open Graph for Social Media Sharing -->
     <meta property="og:title" content="Danuk Downloader - TikTok No Watermark">
     <meta property="og:description" content="Unduh video, story, dan audio TikTok tanpa watermark dengan mudah dan gratis.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://danukdownloader.com/"> 
-    <!-- TODO for Production: Ganti URL og:image di bawah dengan URL gambar banner / logo aslimu -->
-    <meta property="og:image" content="https://placehold.co/1200x630/1a1a2e/e11d48?text=Danuk+Downloader+Official">
+    <meta property="og:image" content="https://placehold.co/1200x630/1a1a2e/e11d48?text=Danuk+Downloader">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     
-    <!-- Tailwind CSS (Catatan: Untuk production, gunakan Tailwind CLI/Vite alih-alih CDN ini) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome & Google Fonts -->
+    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
@@ -72,6 +73,7 @@
         @keyframes shine { 100% { left: 200%; } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
+        /* ANIMASI LOADING BARU YANG LEBIH KEREN */
         .loader-orbit {
             position: relative;
             width: 64px; height: 64px;
@@ -91,13 +93,13 @@
             animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite reverse;
             inset: 8px; box-shadow: inset 0 0 10px rgba(251, 113, 133, 0.3);
         }
-        .loader-orbit i { animation: pulse-glow 2s ease-in-out infinite; }
-        
+        .loader-orbit i {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
         @keyframes pulse-glow {
             0%, 100% { transform: scale(0.9); opacity: 0.7; text-shadow: 0 0 0 rgba(225, 29, 72, 0); }
             50% { transform: scale(1.15); opacity: 1; text-shadow: 0 0 20px rgba(225, 29, 72, 0.9); }
         }
-        
         .btn-spinner {
             width: 22px; height: 22px;
             border: 3px solid rgba(255,255,255,0.2); border-radius: 50%;
@@ -105,6 +107,7 @@
             animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
+        /* TAB UTAMA */
         .nav-tabs { display: flex; gap: 0.5rem; padding: 0.5rem; background: rgba(0,0,0,0.3); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 1.5rem; position: relative; z-index: 20; }
         .nav-tab { flex: 1; padding: 0.75rem 1rem; text-align: center; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; color: #94a3b8; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .nav-tab:hover:not(.active) { background: rgba(255,255,255,0.05); color: #cbd5e1; }
@@ -112,6 +115,7 @@
         .tab-content { display: none; animation: fadeIn 0.3s ease forwards; }
         .tab-content.active { display: block; }
 
+        /* MINI TABS UNTUK HASIL */
         .res-tab-btn { flex: 1; padding: 0.5rem; text-align: center; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; color: #64748b; cursor: pointer; transition: all 0.2s; background: transparent; }
         @media (min-width: 768px) { .res-tab-btn { font-size: 0.8rem; } }
         .res-tab-btn.active { background: #e11d48; color: white; box-shadow: 0 2px 10px rgba(225, 29, 72, 0.3); }
@@ -120,69 +124,67 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #000; border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
         
+        /* Modal Preview Layer */
         #preview-modal { backdrop-filter: blur(8px); }
         .modal-content-scale { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
-
+<!-- Update Flex classes here to allow footer stacking -->
 <body class="antialiased min-h-screen p-2 sm:p-4 md:p-8 flex flex-col items-center justify-start">
-    
-    <!-- Ditambahkan tag semantik <main> -->
-    <main class="w-full max-w-2xl glass-panel rounded-xl sm:rounded-2xl mb-6 relative z-10">
+    <div class="w-full max-w-2xl glass-panel rounded-xl sm:rounded-2xl mb-6 relative z-10">
         
         <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-80 rounded-t-xl sm:rounded-t-2xl pointer-events-none"></div>
 
-        <!-- HEADER (Ditambahkan tag semantik <header>) -->
-        <header class="p-4 md:p-6 pb-4 border-b border-white/5 relative overflow-hidden flex justify-start items-center gap-3 md:gap-5 rounded-t-xl sm:rounded-t-2xl">
-            <i class="fas fa-play absolute -right-4 -top-4 text-7xl md:text-9xl text-white/5 transform -rotate-12 pointer-events-none" aria-hidden="true"></i>
+        <!-- HEADER -->
+        <div class="p-4 md:p-6 pb-4 border-b border-white/5 relative overflow-hidden flex justify-start items-center gap-3 md:gap-5 rounded-t-xl sm:rounded-t-2xl">
+            <i class="fas fa-play absolute -right-4 -top-4 text-7xl md:text-9xl text-white/5 transform -rotate-12 pointer-events-none"></i>
             <div class="relative z-10 shrink-0 group cursor-pointer">
                 <div class="absolute inset-0 bg-gradient-to-tr from-red-600 to-orange-500 rounded-full blur-[6px] md:blur-[10px] opacity-60 animate-pulse transition-opacity duration-500"></div>
-                <!-- Atribut alt diperbarui untuk aksesibilitas -->
-                <img src="danuk.jpg" alt="Logo Danuk Downloader" class="relative w-12 h-12 md:w-16 md:h-16 rounded-full border-[2px] border-black object-cover z-10" onerror="this.src='https://placehold.co/100x100/1e293b/e2e8f0?text=D'">
+                <img src="danuk.jpg" alt="Logo" class="relative w-12 h-12 md:w-16 md:h-16 rounded-full border-[2px] border-black object-cover z-10" onerror="this.src='https://placehold.co/100x100/1e293b/e2e8f0?text=D'">
             </div>
             <div class="flex items-center relative z-10">
                 <div>
                     <h1 class="text-xl md:text-3xl font-extrabold tracking-tight text-white mb-0 md:mb-1 leading-tight">
                         Danuk <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-400">Downloader</span>
                     </h1>
+                    <!-- Deskripsi tetap Bahasa Indonesia sesuai instruksi -->
                     <p class="text-slate-400 text-[10px] md:text-sm font-medium leading-tight mt-0.5">Unduh video, story, dan audio TikTok tanpa watermark dengan mudah dan gratis.</p>
                 </div>
             </div>
-        </header>
+        </div>
 
-        <section class="p-3 md:p-6 pt-3 md:pt-5 relative" aria-label="Aplikasi Utama">
-            <div id="alert-box" class="hidden mb-4 p-3 rounded-lg md:rounded-xl text-[10px] md:text-sm font-medium border relative z-10" role="alert"></div>
+        <div class="p-3 md:p-6 pt-3 md:pt-5 relative">
+            <div id="alert-box" class="hidden mb-4 p-3 rounded-lg md:rounded-xl text-[10px] md:text-sm font-medium border relative z-10"></div>
 
-            <nav class="nav-tabs mb-4 p-1" aria-label="Navigasi Menu">
-                <button type="button" class="nav-tab active py-2 md:py-3 text-xs md:text-sm border-0 focus:outline-none focus:ring-2 focus:ring-red-500" data-target="tab-download">
-                    <i class="fas fa-magic" aria-hidden="true"></i> Extract Link
-                </button>
-                <button type="button" class="nav-tab py-2 md:py-3 text-xs md:text-sm border-0 focus:outline-none focus:ring-2 focus:ring-red-500" data-target="tab-history">
-                    <i class="fas fa-history" aria-hidden="true"></i> History
-                </button>
-            </nav>
+            <div class="nav-tabs mb-4 p-1">
+                <div class="nav-tab active py-2 md:py-3 text-xs md:text-sm" data-target="tab-download">
+                    <i class="fas fa-magic"></i> Extract Link
+                </div>
+                <div class="nav-tab py-2 md:py-3 text-xs md:text-sm" data-target="tab-history">
+                    <i class="fas fa-history"></i> History
+                </div>
+            </div>
 
             <!-- TAB DOWNLOAD -->
             <div id="tab-download" class="tab-content active relative z-10">
                 <form id="download-form" class="mb-2">
                     <div class="group relative z-50 mb-4">
                         <div class="relative flex items-center">
-                            <i class="fas fa-link absolute left-3 md:left-4 text-slate-500 text-xs md:text-base group-focus-within:text-red-400 transition-colors z-30" aria-hidden="true"></i>
+                            <i class="fas fa-link absolute left-3 md:left-4 text-slate-500 text-xs md:text-base group-focus-within:text-red-400 transition-colors z-30"></i>
                             
-                            <!-- Aria-label added for screen readers -->
-                            <input type="url" id="tiktok-url" aria-label="Masukkan Link TikTok" required autocomplete="off" class="w-full py-3.5 pl-10 pr-20 md:pl-12 md:pr-24 input-dark rounded-xl mono relative z-20 text-xs md:text-sm" placeholder="Paste TikTok link here...">
+                            <input type="url" id="tiktok-url" required autocomplete="off" class="w-full py-3.5 pl-10 pr-20 md:pl-12 md:pr-24 input-dark rounded-xl mono relative z-20 text-xs md:text-sm" placeholder="Paste TikTok link here...">
                             
                             <div class="absolute right-2 z-30 flex gap-1">
-                                <!-- Ditambahkan aria-label -->
-                                <button type="button" id="btn-clear" class="hidden w-7 h-7 md:w-8 md:h-8 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 flex items-center justify-center transition tooltip" aria-label="Hapus input" title="Clear input">
+                                <button type="button" id="btn-clear" class="hidden w-7 h-7 md:w-8 md:h-8 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 flex items-center justify-center transition tooltip" title="Clear input">
                                     <i class="fas fa-times text-xs"></i>
                                 </button>
-                                <button type="button" id="btn-paste" class="w-7 h-7 md:w-8 md:h-8 rounded bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-500/30 flex items-center justify-center transition tooltip" aria-label="Tempel tautan" title="Paste URL">
+                                <button type="button" id="btn-paste" class="w-7 h-7 md:w-8 md:h-8 rounded bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-500/30 flex items-center justify-center transition tooltip" title="Paste URL">
                                     <i class="fas fa-paste text-xs"></i>
                                 </button>
                             </div>
@@ -195,7 +197,7 @@
                     </button>
                 </form>
 
-                <div id="loader" class="hidden flex-col items-center justify-center py-10 border border-rose-900/30 rounded-xl bg-gradient-to-b from-black/60 to-black/20 shadow-[inset_0_0_30px_rgba(225,29,72,0.05)] relative overflow-hidden" aria-live="polite">
+                <div id="loader" class="hidden flex-col items-center justify-center py-10 border border-rose-900/30 rounded-xl bg-gradient-to-b from-black/60 to-black/20 shadow-[inset_0_0_30px_rgba(225,29,72,0.05)] relative overflow-hidden">
                     <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
                         <div class="w-32 h-32 bg-red-500 rounded-full blur-[50px] animate-pulse"></div>
                     </div>
@@ -206,11 +208,11 @@
                     <p class="text-[9px] text-slate-400 font-mono animate-pulse uppercase tracking-widest z-10">Please wait...</p>
                 </div>
 
-                <div id="result-section" class="hidden" aria-live="polite">
+                <div id="result-section" class="hidden">
                     <div class="bg-[#0b0f19] border border-slate-700/50 rounded-xl p-3 relative shadow-inner">
                         
                         <div class="flex items-center gap-3 mb-3 bg-black/40 p-2 rounded-lg border border-white/5">
-                            <img id="res-avatar-img" src="" alt="Profile Picture Author" class="w-10 h-10 rounded-full border border-slate-600 object-cover shrink-0">
+                            <img id="res-avatar-img" src="" class="w-10 h-10 rounded-full border border-slate-600 object-cover shrink-0">
                             <div class="flex-1 min-w-0">
                                 <h3 id="res-author" class="text-xs font-bold text-red-400 font-mono truncate">@username</h3>
                                 <p id="res-title" class="text-[10px] md:text-xs text-slate-400 truncate mt-0.5"></p>
@@ -323,26 +325,24 @@
                 </div>
             </div>
 
-        </section>
-    </main>
+        </div>
+    </div>
 
-    <!-- Social Media Footer (Ditambahkan tag semantik <footer>) -->
-    <footer class="flex justify-center gap-6 md:gap-8 mt-1 mb-8 text-slate-500 text-2xl relative z-10 w-full max-w-2xl" aria-label="Media Sosial Danuk">
-        <a href="https://www.tiktok.com/@danukmobilador?_r=1&_t=ZS-9A3KVzabV5T" target="_blank" aria-label="Kunjungi TikTok Danuk" class="hover:text-white transition-transform transform hover:scale-110"><i class="fab fa-tiktok"></i></a>
-        <a href="https://www.instagram.com/danukpermadi2006?stkn=MTF3ZDV0NWI0MjZ5ZQ==" target="_blank" aria-label="Kunjungi Instagram Danuk" class="hover:text-pink-500 transition-transform transform hover:scale-110"><i class="fab fa-instagram"></i></a>
-        <a href="https://youtube.com/@danukmobilador" target="_blank" aria-label="Kunjungi YouTube Danuk" class="hover:text-red-500 transition-transform transform hover:scale-110"><i class="fab fa-youtube"></i></a>
-        <a href="https://github.com/danukpermadi2006" target="_blank" aria-label="Kunjungi Github Danuk" class="hover:text-white transition-transform transform hover:scale-110"><i class="fab fa-github"></i></a>
-        <a href="https://wa.me/6285129769015" target="_blank" aria-label="Hubungi via WhatsApp" class="hover:text-green-500 transition-transform transform hover:scale-110"><i class="fab fa-whatsapp"></i></a>
-    </footer>
+    <!-- Social Media Footer -->
+    <div class="flex justify-center gap-6 md:gap-8 mt-1 mb-8 text-slate-500 text-2xl relative z-10 w-full max-w-2xl">
+        <a href="https://www.tiktok.com/@danukmobilador?_r=1&_t=ZS-9A3KVzabV5T" target="_blank" class="hover:text-white transition-transform transform hover:scale-110"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/danukpermadi2006?stkn=MTF3ZDV0NWI0MjZ5ZQ==" target="_blank" class="hover:text-pink-500 transition-transform transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/@danukmobilador" target="_blank" class="hover:text-red-500 transition-transform transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+        <a href="https://github.com/danukpermadi2006" target="_blank" class="hover:text-white transition-transform transform hover:scale-110"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/6285129769015" target="_blank" class="hover:text-green-500 transition-transform transform hover:scale-110"><i class="fab fa-whatsapp"></i></a>
+    </div>
 
     <!-- MODAL PREVIEW GLOBAL -->
-    <div id="preview-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex-col items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button type="button" onclick="closePreview()" aria-label="Tutup Pratinjau" class="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 bg-white/10 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition backdrop-blur-sm shadow-lg border border-white/20 z-[101]">
+    <div id="preview-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex-col items-center justify-center p-4">
+        <button type="button" onclick="closePreview()" class="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 bg-white/10 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition backdrop-blur-sm shadow-lg border border-white/20 z-[101]">
             <i class="fas fa-times text-lg"></i>
         </button>
         
-        <h2 id="modal-title" class="sr-only">Pratinjau Media</h2>
-
         <div id="modal-media-container" class="modal-content-scale w-full max-w-lg min-h-[200px] flex flex-col items-center justify-center relative bg-black/50 rounded-lg border border-white/10 overflow-hidden shadow-2xl">
         </div>
         
@@ -364,24 +364,14 @@
             }`;
             alertBox.innerHTML = `<div class="mt-0.5"><i class="fas ${type === 'error' ? 'fa-times-circle' : type === 'info' ? 'fa-info-circle' : 'fa-check-circle'} text-sm"></i></div><div class="leading-relaxed flex-1">${message}</div>`;
             alertBox.classList.remove('hidden');
-            if (type !== 'error') setTimeout(() => alertBox.classList.add('hidden'), 6000); 
+            if (type !== 'error') setTimeout(() => alertBox.classList.add('hidden'), 5000); 
         };
 
-        /* 
-         * FIX: Fallback Logic CORS Download
-         * Pada browser modern, mengunduh file media antar-domain (CORS) langsung via fetch() seringkali diblokir.
-         * Kode ini mencoba mendownload, dan jika gagal (karena CORS/tidak ada backend khusus),
-         * maka akan membuka di tab baru dengan notifikasi yang lebih informatif dalam bahasa Indonesia.
-         * 
-         * Saran untuk Production: Buat endpoint backend sendiri (contoh: PHP/NodeJS) yang mem-proxy url tersebut
-         * dengan menambahkan header "Content-Disposition: attachment".
-         */
         window.forceDownload = async function(url, filename) {
-            showAlert('Menyiapkan file untuk diunduh...', 'info');
+            showAlert('Preparing file for download...', 'info');
             try {
-                // Mencoba melakukan fetch langsung (kemungkinan gagal di client-side murni)
                 const response = await fetch(url);
-                if (!response.ok) throw new Error('Network Error or CORS failure');
+                if (!response.ok) throw new Error('Network Error');
                 
                 const blob = await response.blob();
                 const blobUrl = URL.createObjectURL(blob);
@@ -394,12 +384,11 @@
                 document.body.removeChild(a);
                 window.URL.revokeObjectURL(blobUrl);
                 
-                showAlert('Unduhan berhasil dimulai!', 'success');
+                showAlert('Download started successfully!', 'success');
             } catch (err) {
-                console.warn("Direct download failed due to CORS, opening fallback tab.", err);
-                // Fallback: Buka URL di tab baru
+                console.warn("Direct download failed due to CORS, falling back to new tab.", err);
                 window.open(url, '_blank');
-                showAlert('Membuka tab baru untuk mengunduh. <b>Tekan lama video/gambar</b> lalu pilih "Download", atau klik tombol titik tiga (⋮) untuk mengunduh.', 'info');
+                showAlert('Opening new tab. If it doesn\'t download automatically, click (⋮) and select Download.', 'info');
             }
         };
 
@@ -444,7 +433,7 @@
                     };
                     
                     videoEl.onerror = () => {
-                        mediaContainer.innerHTML = '<div class="text-rose-500 text-sm p-10"><i class="fas fa-exclamation-triangle"></i> Gagal memuat pratinjau video.</div>';
+                        mediaContainer.innerHTML = '<div class="text-rose-500 text-sm p-10"><i class="fas fa-exclamation-triangle"></i> Failed to load video preview.</div>';
                     };
                     
                     const source = document.createElement('source');
@@ -465,14 +454,13 @@
                 else if (type === 'image') {
                     const img = new Image();
                     img.src = url;
-                    img.alt = "Image Preview";
                     img.className = 'w-full max-h-[75vh] object-contain bg-black/50';
                     img.onload = () => {
                         mediaContainer.innerHTML = '';
                         mediaContainer.appendChild(img);
                     };
                     img.onerror = () => {
-                        mediaContainer.innerHTML = '<div class="text-rose-500 text-sm p-10"><i class="fas fa-image"></i> Gagal memuat pratinjau gambar.</div>';
+                        mediaContainer.innerHTML = '<div class="text-rose-500 text-sm p-10"><i class="fas fa-image"></i> Failed to load image preview.</div>';
                     };
                 }
             }, 300);
@@ -540,22 +528,13 @@
                 inputUrl.focus();
             });
 
-            // FIX: Clipboard handling dengan permission check yang lebih aman
             btnPaste.addEventListener('click', async () => {
                 try {
-                    if (!navigator.clipboard) {
-                        showAlert('Browser Anda tidak mendukung fitur Paste otomatis.', 'error');
-                        return;
-                    }
                     const text = await navigator.clipboard.readText();
-                    if (!text) {
-                        showAlert('Clipboard kosong.', 'error');
-                        return;
-                    }
                     inputUrl.value = text;
                     btnClear.classList.remove('hidden');
                 } catch (err) {
-                    showAlert('Gagal membaca clipboard. Pastikan Anda telah memberikan izin akses saat pop-up browser muncul.', 'error');
+                    showAlert('Failed to paste text. Ensure clipboard permissions are granted.', 'error');
                 }
             });
 
@@ -580,7 +559,7 @@
                     const tr = document.createElement('tr');
                     tr.className = `hover:bg-white/[0.02] transition-colors cursor-pointer`;
                     tr.innerHTML = `
-                        <td class="p-2 w-12"><img src="${item.cover}" alt="Riwayat ${item.author}" class="w-8 h-12 object-cover rounded opacity-80" onerror="this.src='https://placehold.co/32x48/1e293b/e2e8f0'"></td>
+                        <td class="p-2 w-12"><img src="${item.cover}" class="w-8 h-12 object-cover rounded opacity-80" onerror="this.src='https://placehold.co/32x48/1e293b/e2e8f0'"></td>
                         <td class="p-2 truncate max-w-[150px]">
                             <span class="text-red-400 block mb-0.5 font-bold">
                                 ${item.type === 'image' ? '<i class="fas fa-images mr-1"></i>' : '<i class="fas fa-video mr-1"></i>'} @${item.author}
@@ -619,7 +598,7 @@
                 history = [];
                 localStorage.removeItem('official_dl_history');
                 renderHistory();
-                showAlert('Cache riwayat berhasil dihapus.', 'success');
+                showAlert('History cache cleared successfully.', 'success');
             });
 
             renderHistory();
@@ -654,29 +633,22 @@
                 loader.classList.add('flex');
                 
                 const originalBtnHtml = submitBtn.innerHTML;
-                submitBtn.innerHTML = `<div class="btn-spinner"></div> <span class="animate-pulse tracking-wider">MENGANALISA...</span>`;
+                submitBtn.innerHTML = `<div class="btn-spinner"></div> <span class="animate-pulse tracking-wider">EXTRACTING...</span>`;
                 submitBtn.disabled = true;
 
                 try {
-                    /*
-                     * CATATAN: Untuk Production yang lebih stabil, disarankan membuat API wrapper/backend sendiri
-                     * untuk menghubungi API pihak ketiga. Hal ini menghindari tereksposnya struktur API
-                     * dan meminimalisir pemblokiran akibat Rate Limit IP dari sisi client.
-                     */
                     const response = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`);
                     const rawResult = await response.json();
 
                     if (rawResult.code === -1 || !rawResult.data) {
-                        throw new Error('Video tidak ditemukan, tautan salah, atau akun di-private.');
+                        throw new Error('Video not found or from a private account.');
                     }
 
                     const data = rawResult.data;
                     
                     resAuthor.textContent = `@${data.author.unique_id}`;
-                    resTitle.textContent = data.title || 'Tidak ada deskripsi caption.';
+                    resTitle.textContent = data.title || 'No description available.';
                     resAvatarImg.src = data.author.avatar;
-                    // Fix Aksesibilitas
-                    resAvatarImg.alt = `Foto Profil ${data.author.unique_id}`;
 
                     btnPrevThumb.onclick = () => openPreview('image', data.cover, `Cover_${data.author.unique_id}.jpg`);
                     btnDlThumb.onclick = (e) => { e.preventDefault(); forceDownload(data.cover, `Cover_${data.author.unique_id}.jpg`); };
@@ -697,10 +669,9 @@
                             const slideDiv = document.createElement('div');
                             const filename = `Slide_${data.author.unique_id}_${i+1}.jpg`;
                             slideDiv.className = 'shrink-0 w-28 md:w-32 bg-slate-800/40 border border-slate-700/50 rounded-lg p-1.5 snap-center flex flex-col gap-1.5';
-                            // FIX: Menambahkan atribut Alt yang bermakna pada Image Story
                             slideDiv.innerHTML = `
                                 <div class="relative w-full aspect-[9/16] rounded-md overflow-hidden group cursor-pointer" onclick="openPreview('image', '${imgUrl}', '${filename}')">
-                                    <img src="${imgUrl}" alt="Story Image ${i+1} dari ${data.author.unique_id}" class="w-full h-full object-cover">
+                                    <img src="${imgUrl}" class="w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"><i class="fas fa-expand text-white"></i></div>
                                 </div>
                                 <button type="button" class="w-full bg-red-600 hover:bg-red-500 text-white text-[9px] md:text-[10px] font-bold py-1.5 rounded text-center transition flex items-center justify-center gap-1 shadow-lg shadow-red-900/20" onclick="forceDownload('${imgUrl}', '${filename}')">
@@ -728,7 +699,7 @@
                     loader.classList.add('hidden');
                     loader.classList.remove('flex');
                     resultSection.classList.remove('hidden');
-                    showAlert('Data media berhasil diekstrak!', 'success');
+                    showAlert('Media data successfully retrieved!', 'success');
 
                     saveToHistory(data, url);
 
@@ -738,12 +709,12 @@
                     let errorMsg = error.message;
                     
                     if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError')) {
-                        errorMsg = 'Koneksi ke server API terputus. Pastikan link valid dan coba lagi.';
+                        errorMsg = 'Connection to API server lost or invalid URL. Please try again later.';
                     } else if (errorMsg.includes('Unexpected token')) {
-                        errorMsg = 'Server sedang mengalami gangguan/downtime.';
+                        errorMsg = 'Unrecognized response from server (possible downtime).';
                     }
                     
-                    showAlert(`Gagal: ${errorMsg}`, 'error');
+                    showAlert(`Failed: ${errorMsg}`, 'error');
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnHtml;
